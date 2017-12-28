@@ -13,6 +13,7 @@ Run the following commands in separate terminals:
 """
 
 import rospy
+from custom_sensor_msgs.msg import ImuMin
 from geometry_msgs.msg import Twist
 # TODO: Add an import for the correct message type or else we cannot use it
 
@@ -27,7 +28,7 @@ class Robot:
         self._vel_pub = rospy.Publisher('turtle1/cmd_vel', Twist, queue_size=1)
 
         # This subscribes to the Arduino/IMU. Do not change.
-        rospy.Subscriber('/team7/imu_data', Twist, self.sensorCallback, queue_size=1)
+        rospy.Subscriber('/arduino/imu_data', ImuMin, self.sensorCallback, queue_size=1)
 
     def sensorCallback(self, data):
         angular_x = data.angular.x
